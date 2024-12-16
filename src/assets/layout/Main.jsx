@@ -18,12 +18,14 @@ export default function Main() {
         </div>
 
         {/* Movie Output */}
-        {movies.results && series.results.length > 0 && (
+        {movies.results && movies.results.length > 0 && (
           <section className="my-5">
             <h2 className="fs-1 text-center fw-semibold">Movies</h2>
-            <div className="row row-cols-3 gap-1">
+            <div className="row row-cols-auto gap-1 justify-content-center">
               {movies.results.map((movie) => (
-                <Card key={movie.id} item={movie} />
+                <div key={movie.id} className="col">
+                  <Card item={movie} />
+                </div>
               ))}
             </div>
           </section>
@@ -33,9 +35,11 @@ export default function Main() {
         {series.results && series.results.length > 0 && (
           <section className="my-5">
             <h2 className="fs-1 text-center fw-semibold">TV Series</h2>
-            <div className="row row-cols-3 gap-1">
+            <div className="row row-cols-auto gap-1 justify-content-center">
               {series.results.map((serie) => (
-                <Card key={serie.id} item={serie} />
+                <div key={serie.id} className="col">
+                  <Card item={serie} />
+                </div>
               ))}
             </div>
           </section>

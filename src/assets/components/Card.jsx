@@ -30,7 +30,7 @@ export default function Card({ item }) {
           {item.original_title || item.original_name}
         </p>
         <p>{raiting(item.vote_average)}</p>
-        <p>
+        <div className="my-1">
           {item.origin_country ? (
             <img
               src={`https://flagsapi.com/${item.origin_country}/flat/32.png`}
@@ -41,7 +41,7 @@ export default function Card({ item }) {
               {item.original_language}
             </p>
           )}
-        </p>
+        </div>
         <p>
           <strong>Description: </strong>
           {item.overview}
