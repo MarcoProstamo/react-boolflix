@@ -21,14 +21,18 @@ export function MovieTvContextProvider({ children }) {
     getMovies: function (term) {
       fetch(`${movieUrl}?query=${term}`, options)
         .then((res) => res.json())
-        .then((data) => setMovieTvData({ ...movieTvData, movies: data }))
+        .then((data) =>
+          setMovieTvData((movieTvData) => ({ ...movieTvData, movies: data }))
+        )
         .catch((err) => console.error(err));
     },
     series: [],
     getSeries: function (term) {
       fetch(`${serieUrl}?query=${term}`, options)
         .then((res) => res.json())
-        .then((data) => setMovieTvData({ ...movieTvData, series: data }))
+        .then((data) =>
+          setMovieTvData((movieTvData) => ({ ...movieTvData, series: data }))
+        )
         .catch((err) => console.error(err));
     },
   });

@@ -1,4 +1,21 @@
+import { useState } from "react";
+import { UseMovieTvContext } from "../contexts/MovieTvContext";
+
 export default function Navbar() {
+  const { getMovies, getSeries } = UseMovieTvContext();
+
+  const [term, setTerm] = useState("");
+  function handleChange(e) {
+    const newTerm = e.target.value;
+    setTerm(newTerm);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    getSeries(term);
+    getMovies(term);
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary py-3">
       <div className="container-fluid">
@@ -34,12 +51,18 @@ export default function Navbar() {
               </a>
             </li>
           </ul>
-          <form className="d-flex" role="search">
+          <form
+            className="d-flex"
+            role="search"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <input
               className="form-control me-2 fs-4"
               type="search"
               placeholder="Search..."
               aria-label="Search"
+              value={term}
+              onChange={(e) => handleChange(e)}
             />
             <button className="btn btn-outline-danger fs-4" type="submit">
               Search
