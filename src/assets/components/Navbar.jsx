@@ -4,16 +4,23 @@ import { UseMovieTvContext } from "../contexts/MovieTvContext";
 export default function Navbar() {
   const { getMovies, getSeries } = UseMovieTvContext();
 
-  const [term, setTerm] = useState("");
+  const initialData = { term: "", category: "" };
+  const [inputData, setInputData] = useState(initialData);
+
   function handleChange(e) {
     const newTerm = e.target.value;
-    setTerm(newTerm);
+    const newData = {
+      ...inputData,
+      [e.target.name]: newTerm,
+    };
+    setInputData(newData);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    getSeries(term);
-    getMovies(term);
+    getSeries(inputData.term);
+    getMovies(inputData.term);
+    setInputData(initialData);
   }
 
   return (
@@ -56,13 +63,27 @@ export default function Navbar() {
             role="search"
             onSubmit={(e) => handleSubmit(e)}
           >
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              value={inputData.category}
+              name="category"
+              onChange={(e) => handleChange(e)}
+            >
+              <option value="">Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+
             <input
               className="form-control me-2 fs-4"
               type="search"
               placeholder="Search..."
               aria-label="Search"
-              value={term}
+              value={inputData.term}
               onChange={(e) => handleChange(e)}
+              name="term"
             />
             <button className="btn btn-outline-danger fs-4" type="submit">
               Search
