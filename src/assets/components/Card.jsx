@@ -18,6 +18,17 @@ export default function Card({ item }) {
     return starsArr;
   }
 
+  function languageToFlag(language) {
+    switch (language) {
+      case "en":
+        language = "US";
+        break;
+    }
+    return (
+      <img src={`https://flagsapi.com/${language.toUpperCase()}/flat/32.png`} />
+    );
+  }
+
   return (
     <div className="card p-0 cursor-pointer rounded">
       <img src={posterUrl} className="card-img img-fluid" alt="No Image 😢" />
@@ -36,10 +47,7 @@ export default function Card({ item }) {
               src={`https://flagsapi.com/${item.origin_country}/flat/32.png`}
             />
           ) : (
-            <p>
-              <strong>Language: </strong>
-              {item.original_language}
-            </p>
+            languageToFlag(item.original_language)
           )}
         </div>
         <p>
