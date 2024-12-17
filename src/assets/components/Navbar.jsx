@@ -2,13 +2,17 @@ import { useState } from "react";
 import { UseMovieTvContext } from "../contexts/MovieTvContext";
 
 export default function Navbar() {
-  const { getMovies, getSeries } = UseMovieTvContext();
+  const { getMovies, getSeries, genres } = UseMovieTvContext();
 
   const initialData = { term: "", category: "" };
   const [inputData, setInputData] = useState(initialData);
 
   function handleChange(e) {
-    const newTerm = e.target.value;
+    let newTerm;
+    e.target.name === "term"
+      ? (newTerm = e.target.value)
+      : (newTerm = parseInt(e.target.value));
+
     const newData = {
       ...inputData,
       [e.target.name]: newTerm,
@@ -18,8 +22,8 @@ export default function Navbar() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    getSeries(inputData.term);
-    getMovies(inputData.term);
+    getSeries(inputData.term, inputData.category);
+    getMovies(inputData.term, inputData.category);
     setInputData(initialData);
   }
 
@@ -71,9 +75,12 @@ export default function Navbar() {
               onChange={(e) => handleChange(e)}
             >
               <option value="">Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {genres.genres &&
+                genres.genres.map((genre) => (
+                  <option key={genre.id} value={genre.id}>
+                    {genre.name}{" "}
+                  </option>
+                ))}
             </select>
 
             <input
