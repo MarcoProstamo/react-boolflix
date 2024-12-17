@@ -23,9 +23,12 @@ export function MovieTvContextProvider({ children }) {
       fetch(`${movieUrl}?query=${term}`, options)
         .then((res) => res.json())
         .then((data) => {
-          const filteredMovies = data.results.filter((dato) =>
-            dato.genre_ids.includes(category)
-          );
+          let filteredMovies;
+          category === ""
+            ? (filteredMovies = data.results)
+            : (filteredMovies = data.results.filter((dato) =>
+                dato.genre_ids.includes(category)
+              ));
 
           setMovieTvData((movieTvData) => ({
             ...movieTvData,
@@ -40,9 +43,12 @@ export function MovieTvContextProvider({ children }) {
       fetch(`${serieUrl}?query=${term}`, options)
         .then((res) => res.json())
         .then((data) => {
-          const filteredSeries = data.results.filter((dato) =>
-            dato.genre_ids.includes(category)
-          );
+          let filteredSeries;
+          category === ""
+            ? (filteredSeries = data.results)
+            : (filteredSeries = data.results.filter((dato) =>
+                dato.genre_ids.includes(category)
+              ));
 
           setMovieTvData((movieTvData) => ({
             ...movieTvData,
