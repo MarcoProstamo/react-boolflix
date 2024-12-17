@@ -1,6 +1,8 @@
 export default function Card({ item }) {
-  const posterOrigin = import.meta.env.VITE_POSTER_URL;
-  const posterSize = import.meta.env.VITE_POSTER_SIZE;
+  const VITE_POSTER_URL = "https://image.tmdb.org/t/p";
+  const VITE_POSTER_SIZE = "/w342/";
+  const posterOrigin = VITE_POSTER_URL;
+  const posterSize = VITE_POSTER_SIZE;
   const posterPath = item.poster_path;
   let posterUrl;
   if (posterPath) posterUrl = posterOrigin + posterSize + posterPath;
